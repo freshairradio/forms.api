@@ -1,0 +1,49 @@
+{
+  "name": "EGM Voting",
+  "spec": {
+    "info": {
+      "after": "",
+      "logic": "start",
+      "type": "first",
+      "title": "Vote for Freshair's 2020/2021 Head of News",
+      "body": "As this position wasn't filled during our AGM, we're electing a candidate at this EGM.",
+      "continue": "I'm ready"
+    },
+    "news": {
+      "logic": {
+        "$exists": "info"
+      },
+      "after": "info",
+      "type": "select",
+      "title": "Head of News",
+      "body": "Read each candidate's manifesto on the facebook group 'Freshair Members' before you vote",
+      "data": [
+       {
+          "name": "Felix Rackow",
+          "slug": "felix"
+        },
+        {
+          "name": "Laura Pennycook",
+          "slug": "laura"
+        },
+         {
+          "name": "Nicholas Bush",
+          "slug": "nick"
+        },
+         {
+          "name": "Brigid McMorrow",
+          "slug": "brigid"
+        }
+       
+      ]
+    },
+
+    "finished": {
+      "logic": { "$exists": "news" },
+
+      "after": "news",
+      "type": "last",
+      "title": "Thanks for voting - the results will be announced on Facebook in a couple days."
+    }
+  }
+}

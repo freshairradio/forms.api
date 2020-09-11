@@ -1,0 +1,112 @@
+{
+  "name": "Lockdown Show Application",
+  "spec": {
+    "info": {
+      "after": "",
+      "logic": "start",
+      "type": "first",
+      "title": "Welcome!",
+      "body": "To apply for a show, you need to answer a few questions. If you've got all the information to hand, it should take around 5-10 minutes.",
+      "continue": "I'm ready"
+    },
+    "show_exists": {
+      "logic": {
+        "$exists": "info"
+      },
+      "after": "info",
+      "type": "option",
+      "title": "Pre-existing show",
+      "body": "Have you done this show on Freshair before?",
+      "options": ["No", "This Year", "Earlier"]
+    },
+    "show_details": {
+      "after": "show_exists",
+      "logic": {
+        "$exists": "show_exists"
+      },
+      "type": "input",
+      "title": "Tell us a bit about your show",
+      "body": "Even if you've done this show on Freshair before, please describe how your show will be different during lockdown",
+      "inputs": [
+        {
+          "key": "name",
+          "type": "text",
+          "placeholder": "Show name..."
+        },
+        {
+          "key": "description",
+          "type": "text",
+          "placeholder": "Describe your show..."
+        }
+      ]
+    },
+    "show_pic": {
+      "after": "show_details",
+      "logic": { "$exists": "show_details" },
+      "type": "upload",
+      "title": "Choose a show picture",
+      "prompt": "Click or drop PNG/JPEG here...",
+      "body": "This will be shown on Freshair.org.uk to identify your show",
+      "contentType": ["image/png", "image/jpeg"],
+      "url": "https://forms.api.freshair.org.uk/upload"
+    },
+    "show_people": {
+      "logic": { "$exists": "show_pic" },
+      "after": "show_pic",
+      "type": "filter",
+      "title": "Who else is involved?",
+      "body": "List all involved presenters",
+      "source": "https://auth.api.freshair.org.uk/list"
+    },
+    "show_demo": {
+      "logic": { "$exists": "show_people" },
+      "after": "show_people",
+      "type": "upload",
+      "title": "Upload your show demo",
+      "prompt": "Click or drop MP3 here...",
+      "contentType": ["audio/mpeg", "audio/mp3"],
+      "url": "https://forms.api.freshair.org.uk/upload"
+    },
+
+    "show_category": {
+      "logic": {
+        "$exists": "show_demo"
+      },
+      "after": "show_demo",
+      "type": "select",
+      "title": "Category",
+      "body": "Which category best describes your show?",
+      "source": "https://shows.api.freshair.org.uk/categories"
+    },
+    "broadcast_time": {
+      "after": "show_category",
+      "logic": {
+        "$exists": "show_category"
+      },
+      "type": "input",
+      "title": "Broadcasting & Time",
+      "body": "How often are you planning to record a show? When would you like it to be broadcast?",
+      "inputs": [
+        {
+          "key": "often",
+          "type": "text",
+          "placeholder": "How often..."
+        },
+        {
+          "key": "broadcast",
+          "type": "text",
+          "placeholder": "Ideal broadcast time..."
+        }
+      ]
+    },
+    "finished": {
+      "logic": {
+        "$exists": "broadcast_time"
+      },
+      "after": "broadcast_time",
+      "type": "last",
+      "title": "Thank you for applying!",
+      "body": "We'll be in touch soon. In the meantime, if you have any questions please email programming@freshair.org.uk"
+    }
+  }
+}
