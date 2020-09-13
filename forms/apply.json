@@ -43,6 +43,7 @@
     },
     "personal_details": {
       "after": "show_pic",
+      "logic": "start",
 
       "type": "input",
       "title": "Tell us a bit about yourself",
