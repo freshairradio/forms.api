@@ -111,19 +111,10 @@
         "$exists": "show_category"
       },
       "after": "show_category",
-      "type": "select",
+      "type": "option",
       "title": "Podcast distribution",
       "body": "We're trialling podcast distribution this year, which means your shows will released as podcasts on Spotify and iTunes. Are you happy for your show to be involved in that?",
-      "data": [
-        {
-          "name": "Yes",
-          "slug": "yes"
-        },
-        {
-          "name": "No",
-          "slug": "no"
-        }
-      ]
+      "data": ["Yes", "No"]
     },
 
     "broadcast_time": {
