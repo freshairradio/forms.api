@@ -9,24 +9,15 @@
       "body": "To apply for a show, you need to answer a few questions. If you've got all the information to hand, it should take around 5-10 minutes.",
       "continue": "I'm ready"
     },
-    "show_exists": {
+
+    "show_details": {
+      "after": "info",
       "logic": {
         "$exists": "info"
       },
-      "after": "info",
-      "type": "option",
-      "title": "Pre-existing show",
-      "body": "Have you done this show on Freshair before?",
-      "options": ["No", "This Year", "Earlier"]
-    },
-    "show_details": {
-      "after": "show_exists",
-      "logic": {
-        "$exists": "show_exists"
-      },
       "type": "input",
       "title": "Tell us a bit about your show",
-      "body": "Even if you've done this show on Freshair before, please describe how your show will be different during lockdown",
+      "body": "Give us an idea of what a typical episode will look like, or a general description",
       "inputs": [
         {
           "key": "name",
@@ -46,17 +37,48 @@
       "type": "upload",
       "title": "Choose a show picture",
       "prompt": "Click or drop PNG/JPEG here...",
-      "body": "This will be shown on Freshair.org.uk to identify your show",
+      "body": "This will be shown on freshair.radio to identify your show - if you'd like FreshAir's design team to make your show picture, you can skip this question",
       "contentType": ["image/png", "image/jpeg"],
-      "url": "https://forms.api.freshair.org.uk/upload"
+      "url": "https://forms.api.freshair.radio/upload"
+    },
+    "personal_details": {
+      "after": "show_pic",
+      "logic": {
+        "$exists": "show_pic"
+      },
+      "type": "input",
+      "title": "Tell us a bit about yourself",
+      "inputs": [
+        {
+          "key": "name",
+          "type": "text",
+          "placeholder": "Your name..."
+        },
+        {
+          "key": "email",
+          "type": "text",
+          "placeholder": "Your email..."
+        },
+        {
+          "key": "ssn",
+          "type": "text",
+          "placeholder": "Student number..."
+        }
+      ]
     },
     "show_people": {
-      "logic": { "$exists": "show_pic" },
-      "after": "show_pic",
-      "type": "filter",
+      "logic": { "$exists": "personal_details" },
+      "after": "personal_details",
+      "type": "input",
       "title": "Who else is involved?",
       "body": "List all involved presenters",
-      "source": "https://auth.api.freshair.org.uk/list"
+      "inputs": [
+        {
+          "key": "name",
+          "type": "text",
+          "placeholder": "..."
+        }
+      ]
     },
     "show_demo": {
       "logic": { "$exists": "show_people" },
@@ -65,7 +87,7 @@
       "title": "Upload your show demo",
       "prompt": "Click or drop MP3 here...",
       "contentType": ["audio/mpeg", "audio/mp3"],
-      "url": "https://forms.api.freshair.org.uk/upload"
+      "url": "https://forms.api.freshair.radio/upload"
     },
 
     "show_category": {
@@ -73,15 +95,41 @@
         "$exists": "show_demo"
       },
       "after": "show_demo",
-      "type": "select",
+      "type": "input",
       "title": "Category",
-      "body": "Which category best describes your show?",
-      "source": "https://shows.api.freshair.org.uk/categories"
+      "body": "What category best describes your show?",
+      "inputs": [
+        {
+          "key": "name",
+          "type": "text",
+          "placeholder": "e.g. Music, Politics, News etc..."
+        }
+      ]
     },
-    "broadcast_time": {
-      "after": "show_category",
+    "spotify": {
       "logic": {
         "$exists": "show_category"
+      },
+      "after": "show_category",
+      "type": "select",
+      "title": "Podcast distribution",
+      "body": "We're trialling podcast distribution this year, which means your shows will released as podcasts on Spotify and iTunes. Are you happy for your show to be involved in that?",
+      "data": [
+        {
+          "name": "Yes",
+          "slug": "yes"
+        },
+        {
+          "name": "No",
+          "slug": "no"
+        }
+      ]
+    },
+
+    "broadcast_time": {
+      "after": "spotify",
+      "logic": {
+        "$exists": "spotify"
       },
       "type": "input",
       "title": "Broadcasting & Time",
@@ -99,6 +147,7 @@
         }
       ]
     },
+
     "finished": {
       "logic": {
         "$exists": "broadcast_time"
@@ -106,7 +155,7 @@
       "after": "broadcast_time",
       "type": "last",
       "title": "Thank you for applying!",
-      "body": "We'll be in touch soon. In the meantime, if you have any questions please email programming@freshair.org.uk"
+      "body": "We'll be in touch soon. In the meantime, if you have any questions please email programming@freshair.radio"
     }
   }
 }
