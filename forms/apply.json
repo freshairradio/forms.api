@@ -90,9 +90,7 @@
     },
 
     "show_category": {
-      "logic": {
-        "$exists": "show_demo"
-      },
+      "logic": "start",
       "after": "show_demo",
       "type": "input",
       "title": "Category",
