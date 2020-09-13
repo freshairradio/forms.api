@@ -111,7 +111,7 @@
       "type": "option",
       "title": "Podcast distribution",
       "body": "We're trialling podcast distribution this year, which means your shows will released as podcasts on Spotify and iTunes. Are you happy for your show to be involved in that?",
-      "data": ["Yes", "No"]
+      "options": ["Yes", "No"]
     },
 
     "broadcast_time": {
