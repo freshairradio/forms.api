@@ -85,6 +85,7 @@
       "type": "upload",
       "title": "Upload your show demo",
       "prompt": "Click or drop MP3 here...",
+      "body": "It doesn't have to be super professional, we just want 1-3 minutes that gets to the heart of the show",
       "contentType": ["audio/mpeg", "audio/mp3"],
       "url": "https://forms.api.freshair.radio/upload"
     },
