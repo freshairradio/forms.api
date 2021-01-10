@@ -19,13 +19,13 @@ const app = express();
 app.use(cors());
 const port = process.env.PORT || 8764;
 const spacesEndpoint = new AWS.Endpoint("nyc3.digitaloceanspaces.com");
-const GhostAdminAPI = require("@tryghost/admin-api");
-const ghostToken = process.env.GHOST_TOKEN;
-const Admin = new GhostAdminAPI({
-  url: "https://content.freshair.org.uk",
-  key: ghostToken,
-  version: "v3"
-});
+// const GhostAdminAPI = require("@tryghost/admin-api");
+// const ghostToken = process.env.GHOST_TOKEN;
+// const Admin = new GhostAdminAPI({
+//   url: "https://content.freshair.org.uk",
+//   key: ghostToken,
+//   version: "v3"
+// });
 const Form = mongoose.model(
   `Form`,
   new mongoose.Schema(
