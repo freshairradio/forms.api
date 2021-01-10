@@ -8,7 +8,7 @@ const fs = require("fs").promises;
 const md5 = require("md5");
 
 var MAILGUN_API_KEY = process.env.MAILGUN_TOKEN;
-var DOMAIN = 'mg.freshair.radio';
+var DOMAIN = 'mailgun.freshair.radio';
 var mailgun = require('mailgun.js');
 const mg = mailgun.client({
   url: 'https://api.eu.mailgun.net', // To use EU domains
