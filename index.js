@@ -7,25 +7,25 @@ const multer = require("multer");
 const fs = require("fs").promises;
 const md5 = require("md5");
 
-var API_KEY = '18e40d96615dc49ec7d3afde48df22eb-9dfbeecd-f78d376b';
+var MAILGUN_API_KEY = process.env.MAILGUN_TOKEN;
 var DOMAIN = 'mg.freshair.radio';
 var mailgun = require('mailgun.js');
 const mg = mailgun.client({
   url: 'https://api.eu.mailgun.net', // To use EU domains
   username: 'api',
-  key: API_KEY,
+  key: MAILGUN_API_KEY,
 });
 const app = express();
 app.use(cors());
 const port = process.env.PORT || 8764;
 const spacesEndpoint = new AWS.Endpoint("nyc3.digitaloceanspaces.com");
-// const GhostAdminAPI = require("@tryghost/admin-api");
-// const ghostToken = process.env.GHOST_TOKEN;
-// const Admin = new GhostAdminAPI({
-//   url: "https://content.freshair.org.uk",
-//   key: ghostToken,
-//   version: "v3"
-// });
+const GhostAdminAPI = require("@tryghost/admin-api");
+const ghostToken = process.env.GHOST_TOKEN;
+const Admin = new GhostAdminAPI({
+  url: "https://content.freshair.org.uk",
+  key: ghostToken,
+  version: "v3"
+});
 const Form = mongoose.model(
   `Form`,
   new mongoose.Schema(
@@ -43,15 +43,15 @@ const Form = mongoose.model(
   )
 );
 
-// mongoose.connect(process.env.MONGO_URI || "mongodb://localhost:27017/prod", {
-//   useNewUrlParser: true
-// });
+mongoose.connect(process.env.MONGO_URI || "mongodb://localhost:27017/prod", {
+  useNewUrlParser: true
+});
 
-// const s3 = new AWS.S3({
-//   endpoint: spacesEndpoint,
-//   accessKeyId: process.env.ACCESS_KEY,
-//   secretAccessKey: process.env.SECRET_KEY
-// });
+const s3 = new AWS.S3({
+  endpoint: spacesEndpoint,
+  accessKeyId: process.env.ACCESS_KEY,
+  secretAccessKey: process.env.SECRET_KEY
+});
 
 const upload = multer({
   dest: "/tmp",
@@ -72,12 +72,12 @@ app.post("/upload", upload.single("upload"), async (req, res) => {
     ContentType: req.file.mimetype
   };
   res.send(name);
-  // s3.putObject(params, (err, data) => {
-  //   if (err) console.error(err, err.stack);
-  //   else {
-  //     console.log(`Uploaded: ${name}`);
-  //   }
-  // });
+  s3.putObject(params, (err, data) => {
+    if (err) console.error(err, err.stack);
+    else {
+      console.log(`Uploaded: ${name}`);
+    }
+  });
 });
 
 app.use(express.json());
