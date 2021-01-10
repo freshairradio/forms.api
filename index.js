@@ -110,19 +110,19 @@ app.post("/submit/:slug", async (req, res) => {
     mg.messages.create(DOMAIN, {
       from: 'applications@mg.freshair.radio',
       to: 'webmaster@freshair.radio',
-      subject: 'Show Application for ${data.show_details.name}',
-      text: 'Show Name: ${data.show_details.name} \n \
-      Show Description: ${data.show_details.description} \n \
-      Name: ${data.personal_details.name} \n \
-      Email: ${data.personal_details.email} \n \
-      SSN: ${data.personal_details.ssn} \n \
-      Other people: ${data.show_people.name} \n \
-      Show Category: ${data.show_category.name} \n \
-      Spotify/iTunes Permissions: ${data.spotify} \n \
-      How often would you like to broadcast: ${data.broadcast_time.often} \n \
-      Ideal Broadcast Time: ${data.broadcast_time.broadcast} \n \
-      Show Pic: https://cdn.freshair.radio/upload/${data.show_pic} \n \
-      Show Demo: https://cdn.freshair.radio/upload/${data.show_demo}'
+      subject: `Show Application for ${data.show_details.name}`,
+      text: `Show Name: ${data.show_details.name} 
+      Show Description: ${data.show_details.description} 
+      Name: ${data.personal_details.name} 
+      Email: ${data.personal_details.email} 
+      SSN: ${data.personal_details.ssn} 
+      Other people: ${data.show_people.name} 
+      Show Category: ${data.show_category.name} 
+      Spotify/iTunes Permissions: ${data.spotify} 
+      How often would you like to broadcast: ${data.broadcast_time.often}
+      Ideal Broadcast Time: ${data.broadcast_time.broadcast} 
+      Show Pic: https://cdn.freshair.radio/upload/${data.show_pic} 
+      Show Demo: https://cdn.freshair.radio/upload/${data.show_demo}`
     })
     .then(msg => console.log(msg)) // logs response data
     .catch(err => console.log(err)); // logs any error
