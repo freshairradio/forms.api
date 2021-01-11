@@ -108,10 +108,12 @@ app.post("/submit/:slug", async (req, res) => {
     });
 
     mg.messages.create(DOMAIN, {
-      from: 'applications@mg.freshair.radio',
-      to: 'webmaster@freshair.radio',
+      from: 'applications@mailgun.freshair.radio',
+      to: 'programming@freshair.radio',
+      cc: 'webmaster@freshair.radio, manager@freshair.radio',
       subject: `Show Application for ${data.show_details.name}`,
-      text: `Show Name: ${data.show_details.name} 
+      text: `
+      Show Name: ${data.show_details.name} 
       Show Description: ${data.show_details.description} 
       Name: ${data.personal_details.name} 
       Email: ${data.personal_details.email} 
