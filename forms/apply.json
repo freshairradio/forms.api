@@ -17,7 +17,7 @@
       },
       "type": "input",
       "title": "Tell us a bit about your show",
-      "body": "Give us an idea of what a typical episode will look like, or a general description. <a href=\"https://freshair.radio/content-guidelines\">Freshair Content Guidelines</a>",
+      "body": "Give us an idea of what a typical episode will look like, or a general description.",
       "inputs": [
         {
           "key": "name",
@@ -104,21 +104,11 @@
         }
       ]
     },
-    "spotify": {
-      "logic": {
-        "$exists": "show_category"
-      },
-      "after": "show_category",
-      "type": "option",
-      "title": "Podcast distribution",
-      "body": "We're trialling podcast distribution this year, which means your shows will released as podcasts on Spotify and iTunes. Are you happy for your show to be involved in that?",
-      "options": ["Yes", "No"]
-    },
 
     "broadcast_time": {
-      "after": "spotify",
+      "after": "show_category",
       "logic": {
-        "$exists": "spotify"
+        "$exists": "show_category"
       },
       "type": "input",
       "title": "Broadcasting & Time",
@@ -137,11 +127,22 @@
       ]
     },
 
-    "finished": {
+    "content_guidelines": {
+      "after": "broadcast_time",
       "logic": {
         "$exists": "broadcast_time"
       },
-      "after": "broadcast_time",
+      "type": "information",
+      "title": "Freshair Content Guidelines",
+      "body": "Please read and agree to the <a href=\"https:\\freshair.radio/content-guidelines\">Freshair Content Guidelines</a>.",
+      "continue": "I agree"
+    },
+
+    "finished": {
+      "logic": {
+        "$exists": "content_guidelines"
+      },
+      "after": "content_guidelines",
       "type": "last",
       "title": "Thank you for applying!",
       "body": "We'll be in touch soon. In the meantime, if you have any questions please email programming@freshair.radio"
