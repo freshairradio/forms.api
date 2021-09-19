@@ -6,7 +6,7 @@
       "logic": "start",
       "type": "first",
       "title": "Welcome!",
-      "body": "To apply for a show, you need to answer a few questions and agree to the <a href=\"freshair.radio/content-guidelines\">Freshair Content Guidelines</a>. If you've got all the information to hand, it should take around 5-10 minutes.",
+      "body": "To apply for a show, you need to answer a few questions. If you've got all the information to hand, it should take around 5-10 minutes.",
       "continue": "I'm ready"
     },
 
@@ -17,7 +17,7 @@
       },
       "type": "input",
       "title": "Tell us a bit about your show",
-      "body": "Give us an idea of what a typical episode will look like, or a general description",
+      "body": "Give us an idea of what a typical episode will look like, or a general description. <a href=\"https:\\freshair.radio/content-guidelines\">Freshair Content Guidelines</a>",
       "inputs": [
         {
           "key": "name",
