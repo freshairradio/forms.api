@@ -6,7 +6,7 @@
       "logic": "start",
       "type": "first",
       "title": "Welcome!",
-      "body": "To apply for a show, you need to answer a few questions. If you've got all the information to hand, it should take around 5-10 minutes.",
+      "body": "To apply for a show, you need to answer a few questions and agree to the <a href=\"freshair.radio/content-guidelines\">Freshair Content Guidelines</a>. If you've got all the information to hand, it should take around 5-10 minutes.",
       "continue": "I'm ready"
     },
 
