@@ -35,9 +35,9 @@
       "after": "show_details",
       "logic": { "$exists": "show_details" },
       "type": "upload",
-      "title": "Choose a show picture",
+      "title": "Choose a show picture.",
       "prompt": "Click or drop PNG/JPEG here...",
-      "body": "This will be shown on freshair.radio to identify your show - if you'd like FreshAir's design team to make your show picture, you can skip this question",
+      "body": "This will be shown on freshair.radio to identify your show. Please make sure it is square and at least 1000px by 1000px in size. If you'd like FreshAir's design team to make your show picture, you can skip this question.",
       "contentType": ["image/png", "image/jpeg"],
       "url": "https://forms-api.freshair.radio/upload"
     },
@@ -85,7 +85,7 @@
       "type": "upload",
       "title": "Upload your show demo",
       "prompt": "Click or drop MP3 here...",
-      "body": "It doesn't have to be super professional, we just want 1-3 minutes that gets to the heart of the show",
+      "body": "It doesn't have to be super professional, we just want 1-3 minutes that gets to the heart of the show. Don't worry about audio quality! You can record a demo on whatever device is available to you.",
       "contentType": ["audio/mpeg", "audio/mp3"],
       "url": "https://forms-api.freshair.radio/upload"
     },
@@ -110,21 +110,10 @@
       "logic": {
         "$exists": "show_category"
       },
-      "type": "input",
-      "title": "Broadcasting & Time",
-      "body": "How often are you planning to record a show? When would you like it to be broadcast?",
-      "inputs": [
-        {
-          "key": "often",
-          "type": "text",
-          "placeholder": "How often..."
-        },
-        {
-          "key": "broadcast",
-          "type": "text",
-          "placeholder": "Ideal broadcast time..."
-        }
-      ]
+      "type": "availability",
+      "title": "When are you available?",
+      "body":"Each slot is an hour long. Please select as many as possible to help us fit you in the schedule.",
+      "options": [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
     },
 
     "content_guidelines": {

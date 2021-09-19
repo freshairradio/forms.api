@@ -107,8 +107,26 @@ app.post("/submit/:slug", async (req, res) => {
       path
     });
 
+    const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    var availability = {
+      "Monday": [],
+      "Tuesday": [],
+      "Wednesday": [],
+      "Thursday": [],
+      "Friday": [],
+      "Saturday": [],
+      "Sunday": []
+    };
+
+    data.broadcast_time.forEach((time) => {
+      var day = days[(time[1] % 7)];
+      var hour = time[0];
+      availability[day] += hour + ", ";
+    });
+
     mg.messages.create(DOMAIN, {
       from: 'applications@mailgun.freshair.radio',
+      // to: 'webmaster@freshair.radio',
       to: 'programming@freshair.radio',
       cc: 'webmaster@freshair.radio, manager@freshair.radio',
       subject: `Show Application for ${data.show_details.name}`,
@@ -119,10 +137,9 @@ app.post("/submit/:slug", async (req, res) => {
       Email: ${data.personal_details.email} 
       SSN: ${data.personal_details.ssn} 
       Other people: ${data.show_people.name} 
-      Show Category: ${data.show_category.name} 
-      Spotify/iTunes Permissions: ${data.spotify} 
-      How often would you like to broadcast: ${data.broadcast_time.often}
-      Ideal Broadcast Time: ${data.broadcast_time.broadcast} 
+      Show Category: ${data.show_category.name}
+      Availability: ${JSON.stringify(availability, null, '\t')}
+      Agreed to content guidelines?: ${data.content_guidelines}
       Show Pic: https://cdn.freshair.radio/upload/${data.show_pic} 
       Show Demo: https://cdn.freshair.radio/upload/${data.show_demo}`
     })
